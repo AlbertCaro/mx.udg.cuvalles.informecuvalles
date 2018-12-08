@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         fixedColor: const Color(0xFF78b41e),
+        type: BottomNavigationBarType.fixed,
         onTap: onTapTapped,
         currentIndex: _currentIndex,
         items: [
