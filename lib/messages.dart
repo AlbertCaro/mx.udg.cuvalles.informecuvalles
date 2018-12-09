@@ -11,7 +11,7 @@ class MessagesTab extends StatefulWidget {
 class ListState extends State<MessagesTab> {
 
   List<Message> messages = [
-    new Message('Alberto Caro', 'gadsgdasgadsgasadsfasdfasgdadsgasdgasdgsadgadsgsasgdasdgadsgasdgasgd')
+    new Message('Alberto Caro', 'gadsgdasgadsgasadsfasdfasgdadsgasdgasdgsadgadsgsasgdasdgadsgasdgasgdgdsfdgsfgfsdhsfdhsfdhkjsdflkhlksjfdhgfshdghlkjfdshkjghjlksdfhljkghjlkdsfhljgshdjfhlkgj')
   ];
   @override
   Widget build(BuildContext context) {
@@ -39,12 +39,16 @@ class ItemList extends StatelessWidget {
           children: <Widget>[
             CircleAvatar(child: new Text(message.subject[0])),
             Padding(padding: EdgeInsets.only(right: 10.0)),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-              Text(message.subject, style: TextStyle(fontSize: 18.0), textAlign: TextAlign.left,),
-              Text(message.content, style: TextStyle(fontSize: 12.0))
-            ],)
+            Container(
+              width: MediaQuery.of(context).size.width-80,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(message.subject, style: TextStyle(fontSize: 18.0), textAlign: TextAlign.left,),
+                  Text(message.content, style: TextStyle(fontSize: 12.0), textAlign: TextAlign.left,)
+                ],
+              ),
+            )
           ],
         ),
       ),
