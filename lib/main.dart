@@ -13,7 +13,7 @@ class App extends StatelessWidget {
       title: 'Informe CUValles',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
-        primaryColor: const Color(0xFF0063AD),
+        primaryColor: Color(0xFF0063AD),
       ),
       home: HomePage(),
     );
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        fixedColor: const Color(0xFF78b41e),
+        fixedColor: Color(0xFF78b41e),
         type: BottomNavigationBarType.fixed,
         onTap: onTapTapped,
         currentIndex: _currentIndex,
@@ -61,12 +61,12 @@ class _HomePageState extends State<HomePage> {
               title: Text('Web')
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.fiber_manual_record),
-            title: new Text('En vivo'),
+            icon: Icon(Icons.fiber_manual_record),
+            title: Text('En vivo'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.mail),
-            title: new Text('Mensajes'),
+            icon: Icon(Icons.mail),
+            title: Text('Mensajes'),
           ),
         ],
       ),

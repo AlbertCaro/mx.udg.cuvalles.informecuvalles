@@ -3,22 +3,23 @@ import 'package:flutter/material.dart';
 class MessagesTab extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new ListState();
+    return ListState();
   }
 
 }
 
 class ListState extends State<MessagesTab> {
-  List<String> Messages = [
-    'Mensaje 1', 'Mensaje 2', 'Mensaje 3'
+
+  List<Message> messages = [
+    new Message('Alberto Caro', 'gadsgdasgadsgasadsfasdfasgdadsgasdgasdgsadgadsgsasgdasdgadsgasdgasgd')
   ];
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      child: new ListView.builder(
+    return Container(
+      child: ListView.builder(
         reverse: true,
-        itemBuilder: (_,int index) => ItemList(this.Messages[index]),
-        itemCount: this.Messages.length,
+        itemBuilder: (_,int index) => ItemList(this.messages[index]),
+        itemCount: this.messages.length,
       ),
     );
   }
@@ -26,23 +27,33 @@ class ListState extends State<MessagesTab> {
 }
 
 class ItemList extends StatelessWidget {
-  final String message;
+  final Message message;
   ItemList(this.message);
 
   @override
   Widget build(BuildContext context) {
-    return new Card(
-      child: new Container(
+    return Card(
+      child: Container(
         padding: EdgeInsets.all(8.0),
-        child: new Row(
+        child: Row(
           children: <Widget>[
-            new CircleAvatar(child: new Text(message[0]),),
-            new Padding(padding: EdgeInsets.only(right: 10.0)),
-            new Text(message, style: TextStyle(fontSize: 20.0),)
+            CircleAvatar(child: new Text(message.subject[0])),
+            Padding(padding: EdgeInsets.only(right: 10.0)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+              Text(message.subject, style: TextStyle(fontSize: 18.0), textAlign: TextAlign.left,),
+              Text(message.content, style: TextStyle(fontSize: 12.0))
+            ],)
           ],
         ),
       ),
     );
   }
 
+}
+
+class Message {
+  String subject, content;
+  Message(this.subject, this.content);
 }
