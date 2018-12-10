@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
-class LiveTab extends StatelessWidget {
+class LiveTab extends StatefulWidget {
+  @override
+  LiveState createState() => LiveState();
+}
+
+class LiveState extends State<LiveTab> {
   @override
   Widget build(BuildContext context) {
-    // TODO: Reemplazar el contenido de este widget por la transmición en facebook
-    return Container(
-      color: Colors.red,
-    );
+    // TODO: implement build
+    return null;
   }
 
 }

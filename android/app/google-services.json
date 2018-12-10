@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "850234771219",
+    "firebase_url": "https://informetest-ba50f.firebaseio.com",
+    "project_id": "informetest-ba50f",
+    "storage_bucket": "informetest-ba50f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850234771219:android:d7902eabef781d68",
+        "android_client_info": {
+          "package_name": "mx.udg.cuvalles.informecuvalles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850234771219-38pnvla4n8qjbcfs1tnvnni5s9uaku1p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.udg.cuvalles.informecuvalles",
+            "certificate_hash": "da5840e2b751dce13e53e50a656bd8f22add11e3"
+          }
+        },
+        {
+          "client_id": "850234771219-e7cr6eqe8kl8or3ur4ft1cnsmdk9975k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI3dtWNEaXlv_D7BpTv1Uad6FZ47VINKY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850234771219-e7cr6eqe8kl8or3ur4ft1cnsmdk9975k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'live.dart';
 import 'messages.dart';
 import 'web.dart';
@@ -30,6 +32,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final FirebaseMessaging _messaging = FirebaseMessaging();
+
   int _currentIndex = 0;
   List<Widget> _children = [
     WebTab(),
@@ -71,5 +75,29 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _messaging.requestNotificationPermissions();
+    _messaging.configure(
+      onMessage: (Map<String, dynamic> message) {
+        print(message['notification']);
+        print('on message $message');
+      },
+      onResume: (Map<String, dynamic> message) {
+        print('on resume $message');
+      },
+      onLaunch: (Map<String, dynamic> message) {
+        print('on launch $message');
+      },
+    );
+    _messaging.requestNotificationPermissions(
+        IosNotificationSettings(sound: true, badge: true, alert: true)
+    );
+    _messaging.getToken().then((token) {
+      print("token: "+token);
+    });
   }
 }
