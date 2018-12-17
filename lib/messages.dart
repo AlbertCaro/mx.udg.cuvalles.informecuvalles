@@ -48,7 +48,7 @@ class ItemList extends StatelessWidget {
           children: <Widget>[
             CircleAvatar(
               // TODO: Reemplazar la imagen con lo que sea que vaya a llevar
-              backgroundImage: AssetImage('assets/lord.jpg'),
+              backgroundImage: AssetImage('assets/images/descarga.jpg'),
             ),
             Padding(padding: EdgeInsets.only(right: 10.0)),
             Container(
