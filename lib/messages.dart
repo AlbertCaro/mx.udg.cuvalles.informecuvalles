@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'dart:io';
+import 'package:informe_cuvalles/common/HttpHandler.dart';
+import 'package:informe_cuvalles/model/Message.dart';
 
 class MessagesTab extends StatefulWidget {
   @override
@@ -10,19 +9,11 @@ class MessagesTab extends StatefulWidget {
 
 class ListState extends State<MessagesTab> {
 
-  List messages = new List();
-
-  void fetchData() {
-    getData().then((res) {
-      setState(() {
-        messages.addAll(res);
-      });
-    });
-  }
-
+  List<Message> messages = [
+    //new Message('José Luis Santana Medina', 'Hola ¿qué pedo cachorros? xdDDddD'),
+  ];
   @override
   Widget build(BuildContext context) {
-    print("Messages: "+messages.toString());
     return Container(
       color: Color(0xFFf2f2f2), // Blanco un poco más gris para que resalte más la tarjeta
       child: ListView.builder(
@@ -33,7 +24,20 @@ class ListState extends State<MessagesTab> {
     );
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cargarJson();
+  }
+
+
+  cargarJson() async{
+    String data = await HttpHandler().obtenerMensajes();//deserializar json
+    print(data);
+  }
 }
+
 
 class ItemList extends StatelessWidget {
   final Message message;
@@ -57,7 +61,7 @@ class ItemList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "CUValles",
+                    message.subject,
                     style: TextStyle(fontSize: 18.0),
                     textAlign: TextAlign.left,
                   ),
@@ -78,21 +82,3 @@ class ItemList extends StatelessWidget {
 
 }
 
-Future<List> getData() async {
-  var url = "https:";
-  List data = new List();
-  var request = await HttpClient().getUrl(Uri.parse(url));
-  var response = await request.close();
-  if (response.statusCode == HttpStatus.ok) {
-    var jsonString = await response.transform(utf8.decoder).join();
-    data = json.decode(jsonString);
-    return data;
-  }else{
-    return data;
-  }
-}
-
-class Message { // Molde para los mensajes.
-  String subject, content;
-  Message(this.subject, this.content);
-}
