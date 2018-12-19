@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _messaging.requestNotificationPermissions();
+    _messaging.subscribeToTopic('informe');
     _messaging.configure(
       onMessage: (Map<String, dynamic> message) {
         print(message['notification']);
@@ -110,7 +111,7 @@ class _HomePageState extends State<HomePage> {
           if (_currentIndex != 2)
             notifications = true;
           else
-            onTapTapped(2);
+            _currentIndex = 2;
         });
       },
       onResume: (Map<String, dynamic> message) {
