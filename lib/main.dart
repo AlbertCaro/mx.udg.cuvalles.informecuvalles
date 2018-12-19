@@ -35,6 +35,8 @@ class _HomePageState extends State<HomePage> {
   final FirebaseMessaging _messaging = FirebaseMessaging();
 
   int _currentIndex = 0;
+  bool notifications = false;
+
   List<Widget> _children = [
     WebTab(),
     LiveTab(),
@@ -44,8 +46,17 @@ class _HomePageState extends State<HomePage> {
   void onTapTapped(int index) {
     setState(() {
       _currentIndex = index;
+      if (_currentIndex == 2) {
+        notifications = false;
+      }
     });
   }
+
+  var badge = Icon(
+    Icons.brightness_1,
+    size: 12.0,
+    color: Colors.red,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +80,17 @@ class _HomePageState extends State<HomePage> {
             title: Text('En vivo'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.mail),
+            icon: Stack(children: <Widget>[
+              Icon(Icons.mail),
+              Positioned(
+                  top: -1.0,
+                  right: -1.0,
+                  child: Stack(
+                    children: <Widget>[
+                      (notifications) ? badge : Container()
+                    ],
+                  ))
+            ],),
             title: Text('Mensajes'),
           ),
         ],
@@ -85,6 +106,12 @@ class _HomePageState extends State<HomePage> {
       onMessage: (Map<String, dynamic> message) {
         print(message['notification']);
         print('on message $message');
+        setState(() {
+          if (_currentIndex != 2)
+            notifications = true;
+          else
+            onTapTapped(2);
+        });
       },
       onResume: (Map<String, dynamic> message) {
         print('on resume $message');

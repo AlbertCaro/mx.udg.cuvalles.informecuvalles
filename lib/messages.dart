@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:informe_cuvalles/common/HttpHandler.dart';
 import 'package:informe_cuvalles/model/Message.dart';
+import 'common/API.dart';
+import 'dart:convert';
 
 class MessagesTab extends StatefulWidget {
   @override
@@ -9,9 +10,8 @@ class MessagesTab extends StatefulWidget {
 
 class ListState extends State<MessagesTab> {
 
-  List<Message> messages = [
-    //new Message('José Luis Santana Medina', 'Hola ¿qué pedo cachorros? xdDDddD'),
-  ];
+  List<Message> messages = [];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,15 +26,18 @@ class ListState extends State<MessagesTab> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     cargarJson();
   }
 
-
-  cargarJson() async{
-    String data = await HttpHandler().obtenerMensajes();//deserializar json
-    print(data);
+  void cargarJson() {
+    API.getMessages().then((response) {
+      setState(() {
+        print(response.body);
+        Iterable iterable = json.decode(response.body);
+        messages = iterable.map((model) => Message.fromJson(model)).toList();
+      });
+    });
   }
 }
 
