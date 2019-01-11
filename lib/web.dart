@@ -5,7 +5,7 @@ class WebTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
-        url: "http://google.com" // TODO: Cambiar URL
+        url: "http://www.cuvalles.udg.mx/informe2018/"
     );
   }
 

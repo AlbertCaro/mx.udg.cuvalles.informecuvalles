@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:device_apps/device_apps.dart';
+import 'package:launch_review/launch_review.dart';
 
 import 'live.dart';
 import 'messages.dart';
 import 'web.dart';
+
+const APP_TO_LAUNCH = 'com.mojang.minecraftpe'; // TODO: Cambiar paquete
 
 void main() => runApp(App());
 
@@ -39,7 +43,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _children = [
     WebTab(),
-    LiveTab(),
+//    LiveTab(),
     MessagesTab()
   ];
 
@@ -75,10 +79,10 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.web),
               title: Text('Web')
           ),
-          BottomNavigationBarItem(
+          /*BottomNavigationBarItem(
             icon: Icon(Icons.fiber_manual_record),
             title: Text('En vivo'),
-          ),
+          ),*/
           BottomNavigationBarItem(
             icon: Stack(children: <Widget>[
               Icon(Icons.mail),
@@ -101,6 +105,18 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
+    DeviceApps.isAppInstalled(APP_TO_LAUNCH).then((result) {
+      if (result) {
+        DeviceApps.openApp(APP_TO_LAUNCH); 
+        print('Installed');
+      } else {
+        // TODO: Añadir el ID de la app en App Store
+        LaunchReview.launch(androidAppId: APP_TO_LAUNCH, iOSAppId: "585027354");
+        print('GetApp');
+      }
+    });
+
     _messaging.requestNotificationPermissions();
     _messaging.subscribeToTopic('informe');
     _messaging.configure(
