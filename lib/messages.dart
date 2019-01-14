@@ -12,30 +12,46 @@ class ListState extends State<MessagesTab> {
 
   List<Message> messages = [];
 
+  Widget children = Center(child: CircularProgressIndicator());
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xFFf2f2f2), // Blanco un poco más gris para que resalte más la tarjeta
-      child: ListView.builder(
-        reverse: true,
-        itemBuilder: (_,int index) => ItemList(this.messages[index]),
-        itemCount: this.messages.length,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Informe CUValles"),
       ),
+      body: Container(
+        color: Color(0xFFf2f2f2), // Blanco un poco más gris para que resalte más la tarjeta
+        child: children,
+      )
     );
   }
 
   @override
   void initState() {
     super.initState();
-    cargarJson();
+    loadMessages();
   }
 
-  void cargarJson() {
-    API.getMessages().then((response) {
+  void loadMessages() {
+    API.getMessages().then((iterable) {
+      print("Response: "+iterable);
+      messages = iterable.map((model) => Message.fromJson(model)).toList();
+      children = ListView.builder(
+        reverse: true,
+        itemBuilder: (_,int index) => ItemList(this.messages[index]),
+        itemCount: this.messages.length,
+      );
       setState(() {
-        print(response.body);
-        Iterable iterable = json.decode(response.body);
-        messages = iterable.map((model) => Message.fromJson(model)).toList();
+      });
+    }).catchError((error) {
+      children = Center(child: 
+        Column(children: <Widget>[
+          Icon(Icons.wifi),
+          Text('Revise su conexión')
+        ])
+      );
+      setState(() {
       });
     });
   }

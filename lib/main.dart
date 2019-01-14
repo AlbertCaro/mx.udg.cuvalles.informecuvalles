@@ -65,9 +65,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         fixedColor: Color(0xFF78b41e),
@@ -77,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.web),
-              title: Text('Web')
+              title: Text('Inicio')
           ),
           /*BottomNavigationBarItem(
             icon: Icon(Icons.fiber_manual_record),
@@ -106,7 +103,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    DeviceApps.isAppInstalled(APP_TO_LAUNCH).then((result) {
+    /*DeviceApps.isAppInstalled(APP_TO_LAUNCH).then((result) {
       if (result) {
         DeviceApps.openApp(APP_TO_LAUNCH); 
         print('Installed');
@@ -115,7 +112,7 @@ class _HomePageState extends State<HomePage> {
         LaunchReview.launch(androidAppId: APP_TO_LAUNCH, iOSAppId: "585027354");
         print('GetApp');
       }
-    });
+    });*/
 
     _messaging.requestNotificationPermissions();
     _messaging.subscribeToTopic('informe');
