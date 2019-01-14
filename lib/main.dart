@@ -6,8 +6,9 @@ import 'package:launch_review/launch_review.dart';
 import 'live.dart';
 import 'messages.dart';
 import 'web.dart';
+import 'constants.dart';
 
-const APP_TO_LAUNCH = 'com.mojang.minecraftpe'; // TODO: Cambiar paquete
+ // TODO: Cambiar paquete
 
 void main() => runApp(App());
 
@@ -16,10 +17,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Informe CUValles',
+      title: APP_TITLE,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
-        primaryColor: Color(0xFF0063AD),
+        primaryColor: PRIMARY_COLOR,
       ),
       home: HomePage(),
     );
@@ -29,7 +30,7 @@ class App extends StatelessWidget {
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
 
-  final String title = "Informe CUValles";
+  final String title = APP_TITLE;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Color(0xFF78b41e),
+        fixedColor: ACCENT_COLOR,
         type: BottomNavigationBarType.fixed,
         onTap: onTapTapped,
         currentIndex: _currentIndex,

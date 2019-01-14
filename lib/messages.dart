@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:informe_cuvalles/model/Message.dart';
 import 'common/API.dart';
-import 'dart:convert';
+
+import 'constants.dart';
 
 class MessagesTab extends StatefulWidget {
   @override
@@ -12,17 +13,17 @@ class ListState extends State<MessagesTab> {
 
   List<Message> messages = [];
 
-  Widget children = Center(child: CircularProgressIndicator());
+  Widget child = Center(child: CircularProgressIndicator());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Informe CUValles"),
+        title: Text(APP_TITLE),
       ),
       body: Container(
-        color: Color(0xFFf2f2f2), // Blanco un poco más gris para que resalte más la tarjeta
-        child: children,
+        color: LIST_BACKGROUND_COLOR,
+        child: child,
       )
     );
   }
@@ -34,25 +35,37 @@ class ListState extends State<MessagesTab> {
   }
 
   void loadMessages() {
+    child = Center(child: CircularProgressIndicator());
+    setState(() {});
     API.getMessages().then((iterable) {
       print("Response: "+iterable);
       messages = iterable.map((model) => Message.fromJson(model)).toList();
-      children = ListView.builder(
-        reverse: true,
-        itemBuilder: (_,int index) => ItemList(this.messages[index]),
-        itemCount: this.messages.length,
-      );
-      setState(() {
-      });
+      child = ListView.builder(
+                reverse: true,
+                itemBuilder: (_,int index) => ItemList(this.messages[index]),
+                itemCount: this.messages.length,
+              );
+      setState(() {});
     }).catchError((error) {
-      children = Center(child: 
-        Column(children: <Widget>[
-          Icon(Icons.wifi),
-          Text('Revise su conexión')
-        ])
-      );
-      setState(() {
-      });
+      child = Center(child: 
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                  Icon(
+                    Icons.wifi,
+                    color: Colors.black54,
+                    size: 160,
+                  ),
+                  Text('No se pudo obtener los mensajes, revise su conexión.'),
+                  MaterialButton(
+                    child: Text('Reintentar'),
+                    textColor: ACCENT_COLOR,
+                    onPressed: loadMessages,
+                    )
+                ]),
+              );
+      setState(() {});
     });
   }
 }
