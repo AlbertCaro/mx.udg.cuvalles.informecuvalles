@@ -39,7 +39,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final FirebaseMessaging _messaging = FirebaseMessaging();
 
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   bool notifications = false;
 
   List<Widget> _children = [

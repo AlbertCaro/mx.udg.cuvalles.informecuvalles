@@ -47,17 +47,25 @@ class ListState extends State<MessagesTab> {
               );
       setState(() {});
     }).catchError((error) {
+      print(error);
       child = Center(child: 
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                   Icon(
-                    Icons.wifi,
+                    Icons.wifi_lock,
                     color: Colors.black54,
                     size: 160,
                   ),
-                  Text('No se pudo obtener los mensajes, revise su conexión.'),
+                  Padding(padding: EdgeInsets.only(top: 16.0),),
+                  Text('No se pudo obtener los mensajes',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold),
+                  ),
+                  Padding(padding: EdgeInsets.only(top: 8.0),),
+                  Text('Revise su conexión a internet'),
+                  Padding(padding: EdgeInsets.only(top: 8.0),),
                   MaterialButton(
                     child: Text('Reintentar'),
                     textColor: ACCENT_COLOR,
