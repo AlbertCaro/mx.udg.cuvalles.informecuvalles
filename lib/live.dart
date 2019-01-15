@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 String video = 'http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_20mb.mp4';
@@ -46,4 +46,4 @@ class LiveState extends State<LiveTab> {
     );
   }
 
-}
+}*/

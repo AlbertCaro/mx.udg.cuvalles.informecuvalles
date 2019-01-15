@@ -22,7 +22,7 @@ dependencies:
   flutter_launcher_icons: ^0.7.0
   flutter_webview_plugin: ^0.3.0+2
   firebase_messaging: ^2.1.0
-  video_player: ^0.8.0
+  # video_player: ^0.8.0
   device_apps: ^1.0.4
   launch_review: ^1.0.1
   http: ^0.12.0

@@ -39,7 +39,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final FirebaseMessaging _messaging = FirebaseMessaging();
 
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   bool notifications = false;
 
   List<Widget> _children = [
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
   void onTapTapped(int index) {
     setState(() {
       _currentIndex = index;
-      if (_currentIndex == 2) {
+      if (_currentIndex == 1) {
         notifications = false;
       }
     });
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
         print('Installed');
       } else {
         // TODO: Añadir el ID de la app en App Store
-        LaunchReview.launch(androidAppId: APP_TO_LAUNCH, iOSAppId: "585027354");
+        LaunchReview.launch(androidAppId: APP_TO_LAUNCH, iOSAppId: AR_APP_ID_IOS);
         print('GetApp');
       }
     });*/

@@ -2,11 +2,11 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-const baseUrl = "http://148.202.232.76:8080/";
+import 'package:informe_cuvalles/constants.dart';
 
 class API {
   static Future getMessages() async {
-    var url = baseUrl + "api/mensajes/";
+    var url = SERVER_URL + "api/mensajes/";
     http.Response response = await http.get(url);
 
     if (response.statusCode < 200 || response.statusCode > 300) {
