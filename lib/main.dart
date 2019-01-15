@@ -8,12 +8,9 @@ import 'messages.dart';
 import 'web.dart';
 import 'constants.dart';
 
- // TODO: Cambiar paquete
-
 void main() => runApp(App());
 
 class App extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,7 +36,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final FirebaseMessaging _messaging = FirebaseMessaging();
 
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   bool notifications = false;
 
   List<Widget> _children = [
@@ -51,9 +48,7 @@ class _HomePageState extends State<HomePage> {
   void onTapTapped(int index) {
     setState(() {
       _currentIndex = index;
-      if (_currentIndex == 2) {
-        notifications = false;
-      }
+      if (_currentIndex == 2) notifications = false;
     });
   }
 

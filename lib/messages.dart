@@ -13,7 +13,7 @@ class ListState extends State<MessagesTab> {
 
   List<Message> messages = [];
 
-  Widget child = Center(child: CircularProgressIndicator());
+  Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -41,38 +41,39 @@ class ListState extends State<MessagesTab> {
       print("Response: "+iterable);
       messages = iterable.map((model) => Message.fromJson(model)).toList();
       child = ListView.builder(
-                reverse: true,
-                itemBuilder: (_,int index) => ItemList(this.messages[index]),
-                itemCount: this.messages.length,
-              );
+        reverse: true,
+        itemBuilder: (_,int index) => ItemList(this.messages[index]),
+        itemCount: this.messages.length,
+      );
       setState(() {});
     }).catchError((error) {
       print(error);
-      child = Center(child: 
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                  Icon(
-                    Icons.wifi_lock,
-                    color: Colors.black54,
-                    size: 160,
-                  ),
-                  Padding(padding: EdgeInsets.only(top: 16.0),),
-                  Text('No se pudo obtener los mensajes',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold),
-                  ),
-                  Padding(padding: EdgeInsets.only(top: 8.0),),
-                  Text('Revise su conexión a internet'),
-                  Padding(padding: EdgeInsets.only(top: 8.0),),
-                  MaterialButton(
-                    child: Text('Reintentar'),
-                    textColor: ACCENT_COLOR,
-                    onPressed: loadMessages,
-                    )
-                ]),
-              );
+      child = Center(
+        child: 
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.wifi_lock,
+                color: Colors.black54,
+                size: 160,
+              ),
+              Padding(padding: EdgeInsets.only(top: 16.0),),
+              Text('No se pudo obtener los mensajes',
+                style: TextStyle(
+                fontWeight: FontWeight.bold),
+              ),
+              Padding(padding: EdgeInsets.only(top: 8.0),),
+              Text('Revise su conexión a internet'),
+              Padding(padding: EdgeInsets.only(top: 8.0),),
+              MaterialButton(
+                child: Text('Reintentar'),
+                textColor: ACCENT_COLOR,
+                onPressed: loadMessages,
+              )
+            ]),
+          );
       setState(() {});
     });
   }
@@ -92,7 +93,7 @@ class ItemList extends StatelessWidget {
           children: <Widget>[
             CircleAvatar(
               // TODO: Reemplazar la imagen con lo que sea que vaya a llevar
-              backgroundImage: AssetImage('assets/images/descarga.jpg'),
+              backgroundImage: AssetImage(MESSAGE_PHOTO_PATH),
             ),
             Padding(padding: EdgeInsets.only(right: 10.0)),
             Container(
