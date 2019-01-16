@@ -51,9 +51,7 @@ class _HomePageState extends State<HomePage> {
   void onTapTapped(int index) {
     setState(() {
       _currentIndex = index;
-      if (_currentIndex == 1) {
-        notifications = false;
-      }
+      if (_currentIndex == 1) notifications = false;
     });
   }
 
